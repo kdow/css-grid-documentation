@@ -20,4 +20,12 @@ main {
     grid-template-areas:
       "nav content";
   }
+
+  nav {
+    position: fixed;
+  }
+
+  .nav-link {
+    display: block;
+  }
 }
