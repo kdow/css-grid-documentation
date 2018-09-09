@@ -2,42 +2,259 @@
 <html>
   <head>
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Technical Documentation</title>
+    <title>CSS Grid Technical Documentation</title>
   </head>
   <body>
     <nav id="navbar">
-      <header></header>
-          <a class="nav-link" href="#"></a>
-          <a class="nav-link" href="#"></a>
-          <a class="nav-link" href="#"></a>
-          <a class="nav-link" href="#"></a>
-          <a class="nav-link" href="#"></a>
+      <header>CSS Grid Technical Documentation</header>
+          <a class="nav-link" href="#what_is_grid_layout?">What is grid layout?</a>
+          <a class="nav-link" href="#defining_a_grid">Defining a grid</a>
+          <a class="nav-link" href="#flexible_grids_with_the_fr_unit">
+            Flexible grids with the fr unit</a>
+          <a class="nav-link" href="#gaps_between_tracks">Gaps between tracks</a>
+          <a class="nav-link" href="#repeating_track_listings">Repeating track
+          listings</a>
+          <a class="nav-link" href="#the_implicit_and_explicit_grid">
+            The implicit and explicit grid</a>
+          <a class="nav-link" href="#the_minmax()_function">The minmax() function</a>
+          <a class="nav-link" href="#as_many_columns_as_will_fit">
+            As many columns as will fit</a>
+          <a class="nav-link" href="#line-based_placement">Line-based placement</a>
+          <a class="nav-link" href="#positioning_with_grid-template-areas">
+            Positioning with grid-template-areas</a>
+          <a class="nav-link" href="#reference">Reference</a>
     </nav>
     <main id="main-doc">
-        <section class="main-section" id="">
-          <header></header>
-            <p></p>
-            <p></p>
+        <section class="main-section" id="what_is_grid_layout?">
+          <header>What is grid layout?</header>
+            <p>A grid is simply a collection of horizontal and vertical lines
+              creating a pattern against which we can line up our design
+              elements. They help us to create designs where elements don’t jump
+              around or change width as we move from page to page, providing
+              greater consistency on our websites.</p>
+            <p>A grid will typically have <strong>columns</strong>,
+              <strong>rows</strong>, and then gaps between each row and column —
+              commonly referred to as <strong>gutters</strong>.</p>
         </section>
-        <section class="main-section" id="">
-          <header></header>
-            <p></p>
-            <p></p>
+        <section class="main-section" id="defining_a_grid">
+          <header>Defining a grid</header>
+            <p>To define a grid we use the <code>grid</code> value of the
+              <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/display">
+              display</a> property. As with Flexbox, this switches on Grid
+              Layout, and all of the direct children of the container become
+              grid items. Add this to the CSS inside your file: </p>
+            <code>
+              .container {
+                  display: grid;
+              }
+            </code>
+            <p>Unlike flexbox, the items will not immediately look any
+              different. Declaring <code>display: grid</code> gives you a one
+              column grid, so your items will continue to display one below the
+              other as they do in normal flow.</p>
+            <p>
+              To see something that looks more grid-like, we will need to add
+              some columns to the grid. Let's add three 200-pixel columns here.
+              You can use any length unit, or percentages to create these column
+              tracks.
+            </p>
+            <code>
+              .container {
+                display: grid;
+                grid-template-columns: 200px 200px 200px;
+              }
+            </code>
+            <p>
+              Add the 2nd declaration to your CSS rule, then reload the page,
+              and you should see that the items have rearranged themselves one
+              into each cell of the created grid.
+            </p>
         </section>
-        <section class="main-section" id="">
-          <header></header>
-            <p></p>
-            <p></p>
+        <section class="main-section" id="flexible_grids_with_the_fr_unit">
+          <header>Flexible grids with the fr unit</header>
+            <p>In addition to creating grids using lengths and percentages, we
+              can use the fr unit to flexibly size grid rows and columns. This
+              unit represents one fraction of the available space in the grid
+              container.</p>
+            <p>The fr unit distributes space in proportion, therefore you can
+              give different positive values to your tracks, for example if you
+              change the definition like so:</p>
+            <code>
+              .container {
+                  display: grid;
+                  grid-template-columns: 2fr 1fr 1fr;
+              }
+            </code>
+            <p>The first track now gets 2fr of the available space and the other
+               two tracks get 1fr, making the first track larger. You can mix fr
+               units and fixed length tracks — in such a case the space needed
+               for the fixed tracks is taken away before the space is
+               distributed to the other tracks.</p>
         </section>
-        <section class="main-section" id="">
-          <header></header>
-            <p></p>
-            <p></p>
+        <section class="main-section" id="gaps_between_tracks">
+          <header>Gaps between tracks</header>
+            <p>To create gaps between tracks we use the properties
+              <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/column-gap">
+              <code>grid-column-gap</code></a> for gaps between columns,
+              <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/row-gap">
+              <code>grid-row-gap</code></a> for gaps between rows, and
+              <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/gap">
+              <code>grid-gap</code></a> to set both at once.</p>
+            <code>
+              .container {
+                  display: grid;
+                  grid-template-columns: 2fr 1fr 1fr;
+                  grid-gap: 20px;
+              }
+            </code>
+            <p>These gaps can be any length unit or a percentage, but not an fr
+              unit.</p>
         </section>
-        <section class="main-section" id="">
-          <header></header>
-            <p></p>
-            <p></p>
+        <section class="main-section" id="repeating_track_listings">
+          <header>Repeating track listings</header>
+            <p>You can repeat all, or a section of, your track listing using
+              repeat notation. Change your track listing to the following:</p>
+            <code>
+              .container {
+                  display: grid;
+                  grid-template-columns: repeat(3, 1fr);
+                  grid-gap: 20px;
+              }
+            </code>
+            <p>You will now get 3 1fr tracks just as before. The first value
+              passed to the repeat function is how many times you want the
+              listing to repeat, while the second value is a track listing,
+              which may be one or more tracks that you want to repeat.</p>
+        </section>
+        <section class="main-section" id="the_implicit_and_explicit_grid">
+          <header>The implicit and explicit grid</header>
+            <p>We have only specified column tracks so far, and yet rows are
+              being created to hold our content. This is an example of the
+              explicit versus the implicit grid. The explicit grid is the one
+              that you create using <code>grid-template-columns</code> or
+              <code>grid-template-rows</code>. The implicit grid is created when
+              content is placed outside of that grid — such as into our rows.
+              The explicit and implicit grids are analagous to the main and
+              cross flexbox axes.</p>
+            <p>By default, tracks created in the implicit grid are
+              <code>auto</code> sized, which in general means that they are
+              large enough to fit their content. If you wish to give the tracks
+              the browser creates a size you can use the
+              <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/grid-auto-rows">
+              <code>grid-auto-rows</code></a> and
+              <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/grid-auto-columns">
+              <code>grid-auto-columns</code></a> properties. If you add
+              <code>grid-auto-rows</code> with a value of <code>100px</code> to
+              your CSS, you will see that those created rows are now 100 pixels
+              tall.</p>
+            <code>
+              .container {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                grid-auto-rows: 100px;
+                grid-gap: 20px;
+              }
+            </code>
+        </section>
+        <section class="main-section" id="the_minmax()_function">
+          <header>The minmax() function</header>
+            <p>Our 100-pixel tall tracks won’t be very useful if we add content
+              into those tracks that is taller than 100 pixels, in which case it
+              would cause an overflow. It might be better to have tracks that
+              are <em>at least</em> 100 pixels tall and can still expand if more
+              content gets into them. A fairly basic fact about the web is that
+              you never really know how tall something is going to be;
+              additional content or larger font sizes can cause problems with
+              designs that attempt to be pixel perfect in every dimension.</p>
+            <p>The <code>minmax</code> function lets us set a minimum and
+              maximum size for a track, for example
+              <code>minmax(100px, auto)</code>. The minimum size is 100 pixels,
+              but the maximum is <code>auto</code>, which will expand to fit the
+              content. Try changing <code>grid-auto-rows</code> to use a minmax
+              value:</p>
+            <code>
+              .container {
+                  display: grid;
+                  grid-template-columns: repeat(3, 1fr);
+                  grid-auto-rows: minmax(100px, auto);
+                  grid-gap: 20px;
+              }
+            </code>
+            <p>If you add extra content you will see that the track expands to
+              allow it to fit. Note that the expansion happens right along the
+              row.</p>
+        </section>
+        <section class="main-section" id="as_many_columns_as_will_fit">
+          <header>As many columns as will fit</header>
+            <p>We can combine some of the things we have learned about track
+              listing, repeat notation and <code>minmax()</code> to create a
+              useful pattern. Sometimes it is helpful to be able to ask grid to
+              create as many columns as will fit into the container. We do this
+              by setting the value of <code>grid-template-columns</code> using
+              <code>repeat()</code> notation, but instead of passing in a
+              number, pass in the keyword <code>auto-fill</code>. For the second
+              parameter of the function we use <code>minmax()</code>, with a
+              minimum value equal to the minimum track size that we would like
+              to have, and a maximum of <code>1fr</code>.</p>
+        </section>
+        <section class="main-section" id="line-based_placement">
+          <header>Line-based placement</header>
+            <p>We now move on from creating a grid, to placing things on the
+              grid. Our grid always has lines, these lines start at 1 and relate
+              to the Writing Mode of the document. Therefore in English, column
+              line 1 is on the left hand side of the grid and row line 1 at the
+              top. In Arabic column line 1 would be on the righthand side, as
+              Arabic is written right to left.</p>
+            <p>We can place things according to these lines by specifying the
+              start and end line. We do this using the following properties:</p>
+            <ul>
+              <li>
+                <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/grid-column-start">
+                  <code>grid-column-start</code></a></li>
+              <li>
+                <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/grid-column-end">
+                  <code>grid-column-end</code></a></li>
+              <li>
+                <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/grid-row-start">
+                  <code>grid-row-start</code></a></li>
+              <li>
+                <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/grid-row-end">
+                  <code>grid-row-end</code></a></li>
+            </ul>
+            <p>These properties can all have a line number as the value. You can
+              also use the shorthand properties:</p>
+            <ul>
+              <li>
+                <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/grid-column">
+                <code>grid-column</code></a></li>
+              <li>
+                <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/grid-row">
+                <code>grid-row</code></a></li>
+            </ul>
+            <p>These let you specify the start and end lines at once, separated
+              by a / — a forward slash character.</p>
+        </section>
+        <section class="main-section" id="positioning_with_grid-template-areas">
+          <header>Positioning with grid-template-areas</header>
+            <p>An alternative way to place items on your grid is to use the
+              <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/grid-template-areas">
+              <code>grid-template-areas</code></a> property and giving the
+              various elements of your design a name.</p>
+            <p>The rules for <code>grid-template-areas</code> are as follows:</p>
+            <ul>
+              <li>You need to have every cell of the grid filled.</li>
+              <li>To span across two cells, repeat the name.</li>
+              <li>To leave a cell empty, use a <code>.</code> (period).</li>
+              <li>Areas must be rectangular — you can’t have an L-shaped area
+                for example.</li>
+              <li>Areas can't be repeated in different locations.</li>
+            </ul>
+        </section>
+        <section class="main-section" id="reference">
+          <header>Reference</header>
+            <p>All documentation content in this page is from
+              <a href="https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Grids">
+              MDN</a>.</p>
         </section>
     </main>
   </body>
