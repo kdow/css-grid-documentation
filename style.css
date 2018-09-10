@@ -4,10 +4,30 @@ body {
   grid-template-areas:
     "nav"
     "content";
+  color: #121f1f;
+  background-color: #fefbf7;
 }
 
 nav {
   grid-area: nav;
+}
+
+.nav-link {
+  margin-top: 1em;
+}
+
+a:link {
+  text-decoration: none;
+  color: #202020;
+}
+
+a:visited {
+  color: #345959;
+}
+
+a:hover {
+  color: #599999;
+  font-weight: bold;
 }
 
 main {
