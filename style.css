@@ -39,6 +39,18 @@ main {
   grid-area: content;
 }
 
+.code-block {
+  display:block;
+  white-space: pre;
+  line-height: 1.5;
+  background-color: #d9d9d9;
+  border-radius:5px;
+  border: 2px #808080;
+  border-style: dashed solid;
+  margin: 0 2em 2em 1.5em;
+}
+
+
 @media (min-width: 750px) {
   body {
     grid-template-columns: 300px 1fr;
