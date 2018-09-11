@@ -9,7 +9,6 @@ body {
 }
 
 header {
-  font-style: bold;
   font-size: 1.5em;
 }
 
@@ -27,11 +26,11 @@ a:link {
 }
 
 a:visited {
-  color: #345959;
+  color: #66a6a6;
 }
 
 a:hover {
-  color: #599999;
+  color: #467979;
   font-weight: bold;
 }
 
