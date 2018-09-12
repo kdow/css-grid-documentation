@@ -6,6 +6,7 @@ body {
     "content";
   color: #121f1f;
   background-color: #fefbf7;
+  margin: 2% 5%;
 }
 
 header {
@@ -14,10 +15,12 @@ header {
 
 nav {
   grid-area: nav;
+  margin-bottom: 1em;
 }
 
 .nav-link {
   margin-top: 1em;
+  display: block;
 }
 
 a:link {
@@ -38,6 +41,10 @@ main {
   grid-area: content;
 }
 
+code{
+  background-color: #e6e6e6;
+}
+
 .code-block {
   display:block;
   white-space: pre;
@@ -55,13 +62,18 @@ main {
     grid-template-columns: 300px 1fr;
     grid-template-areas:
       "nav content";
+    margin-left: 2%;
+    margin-right: 2%;
   }
 
   nav {
     position: fixed;
   }
 
+}
+
+@media (max-width: 750px) {
   .nav-link {
-    display: block;
+    padding-right: 2em;
   }
 }
